@@ -1,0 +1,16 @@
+[
+  {
+    "id": "order-1",
+    "description": "I want a pizza cut into very small slices",
+    "food": true,
+    "vip": false,
+    "pickup": {
+      "lat": 41.3965463,
+      "lon": 2.1963997
+    },
+    "delivery": {
+      "lat": 41.407834,
+      "lon": 2.1675979
+    }
+  }
+]

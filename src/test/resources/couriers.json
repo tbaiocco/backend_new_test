@@ -1,0 +1,12 @@
+[
+  {
+    "id": "courier-1",
+    "name": "Manolo Escobar",
+    "box": true,
+    "vehicle": "MOTORCYCLE",
+    "location": {
+      "lat": 41.3965463,
+      "lon": 2.1963997
+    }
+  }
+]
