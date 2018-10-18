@@ -24,7 +24,7 @@ class API {
 		this.welcomeMessage = welcomeMessage;
 		this.orderRepository = orderRepository;
 	}
-
+	
 	@RequestMapping("/")
 	@ResponseBody
 	String root() {
