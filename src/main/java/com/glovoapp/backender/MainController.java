@@ -110,15 +110,7 @@ public class MainController {
     		return new Double(DistanceCalculator.calculateDistance(o1.getPickup(), courier.getLocation()))
     				.compareTo(new Double(DistanceCalculator.calculateDistance(o2.getPickup(), courier.getLocation())));
     	};
-    	
-    	Comparator<Order> sortVip = (o1, o2) -> {
-    		return o1.getVip().compareTo(o2.getVip());
-    	};
-    	
-    	Comparator<Order> sortFood = (o1, o2) -> {
-    		return o1.getFood().compareTo(o2.getFood());
-    	};
-    	
+    	    	
     	Predicate<Order> predicate = o -> Arrays.stream(configUtils.getNeedsBox()).map(w -> w.toLowerCase()).parallel().noneMatch(o.getDescription().toLowerCase()::contains) || courier.getBox();
     	
     	Predicate<Order> predicate2 = o -> DistanceCalculator.calculateDistance(o.getPickup(), courier.getLocation()) < configUtils.getBikeRange() || courier.getVehicle().compareTo(Vehicle.BICYCLE) != 0;

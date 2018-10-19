@@ -15,6 +15,9 @@ public class ConfigUtils {
     
     @Value("${backender.distance_splitter:0.5}") 
     private Double distanceSplitter;
+    
+    @Value("${backender.sort_order}") 
+    private String[] sortOrder;
 
 	public String[] getNeedsBox() {
 		return needsBox;
@@ -62,6 +65,14 @@ public class ConfigUtils {
                 "  , bikeRange=" + bikeRange + " Km" +
                 "  , distanceSplitter=" + distanceSplitter +" Km" +
                 "}";
-    }    
+    }
+
+	public String[] getSortOrder() {
+		return sortOrder;
+	}
+
+	public void setSortOrder(String[] sortOrder) {
+		this.sortOrder = sortOrder;
+	}    
 
 }
