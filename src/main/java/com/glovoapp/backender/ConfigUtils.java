@@ -11,7 +11,7 @@ public class ConfigUtils {
     private String[] needsBox; 
     
     @Value("${backender.bike_range:5}") 
-    private Integer bikeRange;
+    private Double bikeRange;
     
     @Value("${backender.distance_splitter:0.5}") 
     private Double distanceSplitter;
@@ -24,11 +24,11 @@ public class ConfigUtils {
 		this.needsBox = needsBox;
 	}
 
-	public Integer getBikeRange() {
+	public Double getBikeRange() {
 		return bikeRange;
 	}
 
-	public void setBikeRange(Integer bikeRange) {
+	public void setBikeRange(Double bikeRange) {
 		this.bikeRange = bikeRange;
 	}
 
