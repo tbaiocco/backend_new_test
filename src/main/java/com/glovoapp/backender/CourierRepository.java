@@ -27,8 +27,8 @@ class CourierRepository {
     }
 
     Courier findById(String courierId) {
-    	System.out.println("courier:"+courierId);
-        return couriers.stream()
+
+    	return couriers.stream()
                 .filter(courier -> courierId.equals(courier.getId()))
                 .findFirst()
                 .orElse(null);

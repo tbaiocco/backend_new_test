@@ -42,6 +42,14 @@ public class ConfigUtils {
 	public void setDistanceSplitter(Double distanceSplitter) {
 		this.distanceSplitter = distanceSplitter;
 	}
+	
+	public String[] getSortOrder() {
+		return sortOrder;
+	}
+
+	public void setSortOrder(String[] sortOrder) {
+		this.sortOrder = sortOrder;
+	}
 
 	@Override
     public boolean equals(Object o) {
@@ -50,7 +58,8 @@ public class ConfigUtils {
         ConfigUtils config = (ConfigUtils) o;
         return Objects.equals(needsBox, config.needsBox) &&
                 Objects.equals(bikeRange, config.bikeRange) &&
-                Objects.equals(distanceSplitter, config.distanceSplitter);
+                Objects.equals(distanceSplitter, config.distanceSplitter) &&
+                Objects.equals(sortOrder, config.sortOrder);
     }
 
     @Override
@@ -60,19 +69,12 @@ public class ConfigUtils {
 
     @Override
     public String toString() {
-        return "Config Loaded \n{" +
-                "    needsBox='" + Arrays.toString(needsBox) + "'" +
-                "  , bikeRange=" + bikeRange + " Km" +
-                "  , distanceSplitter=" + distanceSplitter +" Km" +
+        return "Config Loaded: \n{" +
+                " needsBox='" + Arrays.toString(needsBox) + "'" +
+                " , bikeRange=" + bikeRange + " Km" +
+                " , distanceSplitter=" + distanceSplitter +" Km" +
+                " , sortOrder='" + Arrays.toString(sortOrder) + "'" +
                 "}";
     }
-
-	public String[] getSortOrder() {
-		return sortOrder;
-	}
-
-	public void setSortOrder(String[] sortOrder) {
-		this.sortOrder = sortOrder;
-	}    
 
 }
