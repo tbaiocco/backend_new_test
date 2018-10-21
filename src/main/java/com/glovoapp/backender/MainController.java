@@ -6,10 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,27 +18,23 @@ import com.google.gson.Gson;
 @RestController
 public class MainController {
 
-	private final String welcomeMessage;
     private final OrderRepository orderRepository;
     private final CourierRepository courierRepository;
+    private final MainService mainService;
     
     @Autowired
     ConfigUtils configUtils;
     
     @Autowired
-    public MainController(@Value("${backender.welcome_message}") String welcomeMessage, OrderRepository orderRepository, CourierRepository courierRepository) {
-		this.welcomeMessage = welcomeMessage;
+    public MainController(OrderRepository orderRepository, CourierRepository courierRepository, MainService mainService) {
 		this.orderRepository = orderRepository;
 		this.courierRepository = courierRepository;
+		this.mainService = mainService;
 	}
     
     @GetMapping("/config")
-    String test() {
-    	return welcomeMessage
-    			.concat("\n")
-    			.concat(configUtils.toString())
-    			.concat("\n")
-    			.concat("other vars");
+    String showConfig() {
+    	return configUtils.toString();
     }
     
     @GetMapping("/couriers")
@@ -81,27 +75,9 @@ public class MainController {
         return out;
     }
     
-    @Deprecated
-    public void filterByContent(Stream<Order> orders, Courier courier) {
-    	
-    	Predicate<Order> predicate = o -> Arrays.stream(configUtils.getNeedsBox()).parallel().noneMatch(o.getDescription()::contains) || courier.getBox();
-    	
-    	orders.filter(predicate);
-    	
-    }
-    
-    @Deprecated
-    public void filterByDistance(Stream<Order> orders, Courier courier) {
-    	
-    	Predicate<Order> predicate = o -> DistanceCalculator.calculateDistance(o.getPickup(), courier.getLocation()) < 5d || courier.getVehicle().compareTo(Vehicle.BICYCLE) != 0;
-    	
-    	orders.filter(predicate);
-    	
-    }
-
-    @GetMapping(value="/orders/{courierId}")
+    @GetMapping(value="/orders/allInOne/{courierId}")
     @ResponseBody
-    Map<Long, List<OrderVMTeo>> ordersForCourier(@PathVariable String courierId) {
+    Map<Long, List<OrderVMTeo>> ordersForCourierInOneMethod(@PathVariable String courierId) {
 
     	//this is a first try, doing a full method
     	Courier courier = courierRepository.findById(courierId);
@@ -131,4 +107,24 @@ public class MainController {
     	
         return groupByDistance;
     }
+    
+    @GetMapping(value="/orders/{courierId}")
+    @ResponseBody
+    Map<Long, List<OrderVM>> ordersForCourier(@PathVariable String courierId) {
+    	
+    	//Process data
+    	Map<Long, List<Order>> filtered = mainService.processRequest(courierId);
+    	
+    	Map<Long, List<OrderVM>> groupByDistance = 
+    			filtered
+    			.entrySet()
+    			.stream()
+    			.collect(Collectors.toMap(
+    					e -> e.getKey(), 
+    					e -> (List<OrderVM>)mainService.convert(e.getValue()))
+    			);
+    			
+        return groupByDistance;
+    }
+
 }
