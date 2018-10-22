@@ -15,7 +15,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class ConfigExtended {
 
 	@Bean
-	public ConfigUtils getParameters() {
+	public ConfigUtils configUtils() {
 		return new ConfigUtils();
 	}
 	
@@ -23,7 +23,7 @@ public class ConfigExtended {
 	public Docket api() {
 		return new Docket(DocumentationType.SWAGGER_2)
 				.apiInfo(new ApiInfoBuilder()
-						.description("This is a text development for Glovo.\n".concat(getParameters().toString()))
+						.description("This is a test development for Glovo.\n".concat(configUtils().toString()))
 						.license("Proprietary!")
 						.build())
 				.select()

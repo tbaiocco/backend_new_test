@@ -13,22 +13,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class MainController {
 
-    private final MainService mainService;
-    
-    @Autowired
-    ConfigUtils configUtils;
+    private final MainService service;
     
     @Autowired
     public MainController(MainService mainService) {
-		this.mainService = mainService;
+		this.service = mainService;
 	}
     
     @GetMapping(value="/orders/{courierId}")
     @ResponseBody
     Map<Long, List<OrderVM>> ordersForCourier(@PathVariable String courierId) {
-    	
     	//Process data
-    	Map<Long, List<Order>> filtered = mainService.processRequest(courierId);
+    	Map<Long, List<Order>> filtered = service.processRequest(courierId);
     	
     	//Convert to view
     	Map<Long, List<OrderVM>> groupByDistance = 
@@ -37,7 +33,7 @@ public class MainController {
     			.stream()
     			.collect(Collectors.toMap(
     					e -> e.getKey(), 
-    					e -> (List<OrderVM>)mainService.convert(e.getValue()))
+    					e -> (List<OrderVM>)service.convert(e.getValue()))
     			);
     			
         return groupByDistance;

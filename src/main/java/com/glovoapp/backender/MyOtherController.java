@@ -19,16 +19,17 @@ public class MyOtherController {
 
 	private final OrderRepository orderRepository;
     private final CourierRepository courierRepository;
-    private final MainService mainService;
+    @Autowired
+    private MainService mainService;
+    @Autowired
+    private ConfigUtils configUtils;    
     
     @Autowired
-    ConfigUtils configUtils;
-    
-    @Autowired
-    public MyOtherController(OrderRepository orderRepository, CourierRepository courierRepository, MainService mainService) {
+    public MyOtherController(OrderRepository orderRepository, CourierRepository courierRepository/*, MainService mainService, ConfigUtils configUtils*/) {
 		this.orderRepository = orderRepository;
 		this.courierRepository = courierRepository;
-		this.mainService = mainService;
+//		this.mainService = mainService;
+//		this.configUtils = configUtils;
 	}
     
     @GetMapping("/config")
