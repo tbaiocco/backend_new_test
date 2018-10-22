@@ -17,14 +17,13 @@ public class MainService {
 
 	private final OrderRepository orderRepository;
     private final CourierRepository courierRepository;
+    private final ConfigUtils configUtils;
     
     @Autowired
-    private ConfigUtils configUtils;
-    
-    @Autowired
-    public MainService(OrderRepository orderRepository, CourierRepository courierRepository) {
+    public MainService(OrderRepository orderRepository, CourierRepository courierRepository, ConfigUtils configUtils) {
 		this.orderRepository = orderRepository;
 		this.courierRepository = courierRepository;
+		this.configUtils = configUtils;
 	}
     
     public Map<Long, List<Order>> processRequest(String courierId) {

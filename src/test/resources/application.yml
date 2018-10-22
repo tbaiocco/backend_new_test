@@ -1,0 +1,18 @@
+spring:
+    jackson:
+        serialization.FAIL_ON_EMPTY_BEANS: false
+
+backender:
+    welcome_message: Bienvenido a Glovo
+    
+    # any keyword or phrase, comma separated values
+    box_keywords: hot dog, fries, flaMINGO    
+    
+    # in kilometers, decimal number 
+    bike_range: 5.0                           
+    
+    # in kilometers, decimal number
+    distance_splitter: 0.5                    
+
+    # available keyword: [vip - preferred customers], [food - food orders], [distance - distance of order to glover]
+    sort_order: vip, food, distance           # comma separated values           
