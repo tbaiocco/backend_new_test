@@ -4,7 +4,9 @@ import java.util.Arrays;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ConfigUtils {
 	
 	@Value("${backender.box_keywords:}") 
