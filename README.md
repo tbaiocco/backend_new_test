@@ -8,4 +8,6 @@ This is a Java8 Spring Boot project. Get familiar with it and import it into you
 
 After that, start with the [WORDING](./WORDING.md). Good luck :)!
 
+Thanks for this opportunity, I really enjoyed the time playing with this little project.
+Please read my [DEVNOTES](./DEVNOTES.md). Best regards, Téo! 
 
