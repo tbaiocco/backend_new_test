@@ -15,4 +15,5 @@ backender:
     distance_splitter: 0.5                    
 
     # available keyword: [vip - preferred customers], [food - food orders], [distance - distance of order to glover]
-    sort_order: vip, food, distance           # comma separated values           
+    # comma separated values
+    sort_order: vip, food, distance                      
